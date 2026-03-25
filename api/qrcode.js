@@ -1,6 +1,6 @@
-import { Encoder, Hanzi, Byte } from '@nuintun/qrcode';
+const { Encoder, Hanzi, Byte } = require('@nuintun/qrcode');
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -39,6 +39,7 @@ export default async function handler(req, res) {
     res.status(200).json({ success: true, dataURL, mode });
     
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
-}
+};
