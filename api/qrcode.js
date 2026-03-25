@@ -1,10 +1,11 @@
 const { Encoder, Hanzi, Byte } = require('@nuintun/qrcode');
 const iconv = require('iconv-lite');
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -25,16 +26,14 @@ module.exports = async (req, res) => {
     const hanziRegex = /^[\u4e00-\u9fa5]+$/;
     
     if (hanziRegex.test(text)) {
+      // 纯汉字 -> Hanzi 模式
       qrcode = encoder.encode(new Hanzi(text));
       mode = 'hanzi';
     } else {
-      // 混合内容 -> GB2312 编码
-      const encoderGB = new Encoder({
-        level: 'M',
-        encode: (content) => iconv.encode(content, 'gb2312')
-      });
-      qrcode = encoderGB.encode(new Byte(text));
-      mode = 'gb2312';
+      // 混合内容 -> 用默认 Byte 模式
+      // 因为 Vercel serverless 环境可能不支持 iconv-lite
+      qrcode = encoder.encode(new Byte(text));
+      mode = 'utf8';
     }
     
     const dataURL = qrcode.toDataURL(10, {
@@ -49,4 +48,4 @@ module.exports = async (req, res) => {
     console.error(err);
     res.status(500).json({ error: err.message });
   }
-};
+}
