@@ -1,7 +1,6 @@
 {
   "name": "qrcode-gb2312",
   "version": "1.0.0",
-  "description": "GB2312 二维码生成器",
   "dependencies": {
     "@nuintun/qrcode": "^5.0.3"
   }

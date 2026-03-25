@@ -8,22 +8,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="二维码生成">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23667eea' width='100' height='100' rx='20'/><text x='50' y='65' text-anchor='middle' font-size='50'>📱</text></svg>">
     <title>GB2312 二维码生成器</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
         .container {
             max-width: 400px;
             margin: 0 auto;
@@ -32,33 +25,10 @@
             padding: 30px 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: #888;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            color: #555;
-            font-size: 14px;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
+        h1 { text-align: center; color: #333; font-size: 22px; margin-bottom: 8px; }
+        .subtitle { text-align: center; color: #888; font-size: 13px; margin-bottom: 25px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; color: #555; font-size: 14px; margin-bottom: 8px; font-weight: 500; }
         textarea {
             width: 100%;
             height: 100px;
@@ -67,14 +37,8 @@
             border-radius: 12px;
             font-size: 16px;
             resize: none;
-            transition: border-color 0.3s;
         }
-        
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
+        textarea:focus { outline: none; border-color: #667eea; }
         .generate-btn {
             width: 100%;
             padding: 15px;
@@ -85,91 +49,18 @@
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
         }
-        
-        .generate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .generate-btn:active {
-            transform: translateY(0);
-        }
-        
-        .generate-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .result {
-            margin-top: 25px;
-            text-align: center;
-            display: none;
-        }
-        
-        .result.show {
-            display: block;
-        }
-        
-        .qr-container {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-        
-        #qrcode {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .tip {
-            color: #888;
-            font-size: 13px;
-            margin-top: 10px;
-        }
-        
-        .mode-info {
-            color: #667eea;
-            font-size: 12px;
-            margin-top: 5px;
-        }
-        
-        .error {
-            color: #e74c3c;
-            font-size: 14px;
-            padding: 15px;
-            background: #fdf2f2;
-            border-radius: 10px;
-            display: none;
-            margin-top: 15px;
-        }
-        
-        .error.show {
-            display: block;
-        }
-        
-        .install-prompt {
-            display: none;
-            background: #f0f7ff;
-            border: 1px solid #667eea;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .install-prompt button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
+        .generate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .result { margin-top: 25px; text-align: center; display: none; }
+        .result.show { display: block; }
+        .qr-container { background: #f8f9fa; border-radius: 15px; padding: 20px; margin-bottom: 15px; }
+        #qrcode { max-width: 100%; height: auto; }
+        .tip { color: #888; font-size: 13px; margin-top: 10px; }
+        .mode-info { color: #667eea; font-size: 12px; margin-top: 5px; }
+        .error { color: #e74c3c; font-size: 14px; padding: 15px; background: #fdf2f2; border-radius: 10px; display: none; margin-top: 15px; }
+        .error.show { display: block; }
+        .install-prompt { display: none; background: #f0f7ff; border: 1px solid #667eea; border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: center; }
+        .install-prompt button { background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -178,7 +69,7 @@
         <p class="subtitle">支持扫码枪识别中文</p>
         
         <div class="install-prompt" id="installPrompt">
-            <p>📲 添加到主屏幕，像 App 一样使用</p>
+            <p>📲 添加到主屏幕使用</p>
             <button id="installBtn">安装应用</button>
         </div>
         
@@ -195,20 +86,14 @@
             <div class="qr-container">
                 <img id="qrcode" alt="QR Code">
             </div>
-            <p class="tip">💡 长按图片保存到手机</p>
+            <p class="tip">💡 长按图片保存</p>
             <p class="mode-info" id="modeInfo"></p>
         </div>
     </div>
 
-    <!-- 使用 iconv-lite 的纯前端版本 -->
-    <script src="https://cdn.jsdelivr.net/npm/iconv-lite@0.6.3/lib/index.js"></script>
-    <script type="module">
-        import { Encoder, Hanzi, Byte } from 'https://cdn.jsdelivr.net/npm/@nuintun/qrcode@5.0.3/+esm';
-        
-        // PWA 安装提示
+    <script>
         let deferredPrompt;
         const installPrompt = document.getElementById('installPrompt');
-        const installBtn = document.getElementById('installBtn');
         
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -216,42 +101,15 @@
             installPrompt.style.display = 'block';
         });
         
-        installBtn.addEventListener('click', async () => {
+        document.getElementById('installBtn').addEventListener('click', async () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installPrompt.style.display = 'none';
-                }
                 deferredPrompt = null;
+                installPrompt.style.display = 'none';
             }
         });
         
-        // GB2312 编码函数
-        function encodeGB2312(text) {
-            const gb2312Bytes = [];
-            for (let i = 0; i < text.length; i++) {
-                const char = text[i];
-                const code = text.charCodeAt(i);
-                
-                if (code < 128) {
-                    // ASCII 字符
-                    gb2312Bytes.push(code);
-                } else {
-                    // 中文字符 - 使用 GB2312 编码
-                    // 这里我们使用简化的方法：直接用 UTF-8，但标记为 GB2312 模式
-                    // 实际上 QR 码的 Byte 模式只是存储字节，关键在于扫码端的解码
-                    const encoder = new TextEncoder();
-                    const bytes = encoder.encode(char);
-                    gb2312Bytes.push(...bytes);
-                }
-            }
-            return new Uint8Array(gb2312Bytes);
-        }
-        
-        // 生成二维码
         document.getElementById('generateBtn').addEventListener('click', generateQRCode);
-        
         document.getElementById('text').addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -259,7 +117,7 @@
             }
         });
         
-        function generateQRCode() {
+        async function generateQRCode() {
             const text = document.getElementById('text').value.trim();
             const errorEl = document.getElementById('error');
             const resultEl = document.getElementById('result');
@@ -278,52 +136,27 @@
             btn.textContent = '生成中...';
             
             try {
-                const encoder = new Encoder({ level: 'M' });
-                let qrcode;
-                let mode;
+                const response = await fetch('/api/qrcode?text=' + encodeURIComponent(text));
+                const data = await response.json();
                 
-                // 检查是否全是汉字
-                const hanziRegex = /^[\u4e00-\u9fa5]+$/;
-                
-                if (hanziRegex.test(text)) {
-                    // 纯汉字 -> Hanzi 模式
-                    qrcode = encoder.encode(new Hanzi(text));
-                    mode = 'hanzi';
+                if (data.success) {
+                    document.getElementById('qrcode').src = data.dataURL;
+                    document.getElementById('modeInfo').textContent = 
+                        data.mode === 'hanzi' 
+                            ? '编码: Hanzi (纯汉字，扫码枪可识别)' 
+                            : '编码: UTF-8 (混合内容)';
+                    resultEl.classList.add('show');
                 } else {
-                    // 混合内容 -> 用默认 Byte 模式 (UTF-8)
-                    // 注意：扫码枪可能无法识别 UTF-8 编码的中文
-                    qrcode = encoder.encode(new Byte(text));
-                    mode = 'utf8';
+                    errorEl.textContent = '生成失败: ' + data.error;
+                    errorEl.classList.add('show');
                 }
-                
-                const dataURL = qrcode.toDataURL(10, {
-                    margin: 2,
-                    foreground: [0, 0, 0],
-                    background: [255, 255, 255]
-                });
-                
-                document.getElementById('qrcode').src = dataURL;
-                document.getElementById('modeInfo').textContent = 
-                    mode === 'hanzi' 
-                        ? '编码模式: Hanzi (纯汉字，扫码枪可识别)' 
-                        : '编码模式: UTF-8 (混合内容，扫码枪可能无法识别中文)';
-                resultEl.classList.add('show');
-                
             } catch (err) {
-                console.error(err);
-                errorEl.textContent = '生成失败: ' + err.message;
+                errorEl.textContent = '网络错误: ' + err.message;
                 errorEl.classList.add('show');
             } finally {
                 btn.disabled = false;
                 btn.textContent = '生成二维码';
             }
-        }
-        
-        // 注册 Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(() => console.log('Service Worker registered'))
-                .catch(err => console.log('Service Worker registration failed:', err));
         }
         
         document.getElementById('text').focus();
