@@ -1,4 +1,5 @@
 const { Encoder, Hanzi, Byte } = require('@nuintun/qrcode');
+const iconv = require('iconv-lite');
 
 module.exports = async (req, res) => {
   // CORS
@@ -16,18 +17,27 @@ module.exports = async (req, res) => {
   }
   
   try {
-    const encoder = new Encoder({ level: 'M' });
     let qrcode;
     let mode;
     
+    // 检查是否全是汉字
     const hanziRegex = /^[\u4e00-\u9fa5]+$/;
     
     if (hanziRegex.test(text)) {
+      // 纯汉字 -> Hanzi 模式 (GB2312)
+      const encoder = new Encoder({ level: 'M' });
       qrcode = encoder.encode(new Hanzi(text));
       mode = 'hanzi';
     } else {
+      // 混合内容 -> GBK 编码
+      const encoder = new Encoder({ 
+        level: 'M',
+        encode: (content) => {
+          return iconv.encode(content, 'gbk');
+        }
+      });
       qrcode = encoder.encode(new Byte(text));
-      mode = 'utf8';
+      mode = 'gbk';
     }
     
     const dataURL = qrcode.toDataURL(10, {
